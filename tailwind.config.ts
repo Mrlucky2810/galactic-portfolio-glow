@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,12 +19,35 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'space': ['Space Grotesk', 'sans-serif'],
+				'mono': ['JetBrains Mono', 'monospace'],
+				'inter': ['Inter', 'sans-serif'],
+			},
 			colors: {
+				// Base colors
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				
+				// Custom neon palette
+				neon: {
+					cyan: '#00e5ff',
+					purple: '#c77dff',
+					pink: '#ff3cac',
+					lime: '#00ffab',
+					blue: '#004aad',
+				},
+				
+				// Gradient stops
+				gradient: {
+					dark: '#0f0f1e',
+					mid: '#1a1a2e',
+					light: '#2c3e50',
+				},
+				
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -52,44 +76,52 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
+			},
+			backgroundImage: {
+				'gradient-nebula': 'linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #2c3e50 100%)',
+				'gradient-neon': 'linear-gradient(135deg, #00e5ff 0%, #c77dff 50%, #ff3cac 100%)',
+			},
+			animation: {
+				'float': 'float 6s ease-in-out infinite',
+				'glow': 'glow 2s ease-in-out infinite alternate',
+				'typewriter': 'typewriter 4s steps(40) infinite',
+				'fade-in-up': 'fadeInUp 0.8s ease-out',
+				'slide-in-right': 'slideInRight 0.6s ease-out',
+				'rotate-slow': 'rotate 20s linear infinite',
+				'pulse-neon': 'pulseNeon 2s ease-in-out infinite',
+			},
+			keyframes: {
+				float: {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-20px)' },
+				},
+				glow: {
+					'0%': { boxShadow: '0 0 20px rgba(0, 229, 255, 0.5)' },
+					'100%': { boxShadow: '0 0 30px rgba(0, 229, 255, 0.8)' },
+				},
+				typewriter: {
+					'0%': { width: '0%' },
+					'50%': { width: '100%' },
+					'100%': { width: '0%' },
+				},
+				fadeInUp: {
+					'0%': { opacity: '0', transform: 'translateY(30px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' },
+				},
+				slideInRight: {
+					'0%': { opacity: '0', transform: 'translateX(30px)' },
+					'100%': { opacity: '1', transform: 'translateX(0)' },
+				},
+				pulseNeon: {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.7' },
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
-			keyframes: {
-				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
-				},
-				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
-				}
-			},
-			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
