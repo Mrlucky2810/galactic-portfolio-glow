@@ -22,7 +22,7 @@ const Hero = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: 'easeOut',
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     },
   };
@@ -46,14 +46,14 @@ const Hero = () => {
             animate={{ 
               opacity: [0, 0.7, 0],
               scale: [0, 1, 0],
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
             }}
             transition={{
               duration: 8,
               repeat: Infinity,
               delay: index * 2,
-              ease: 'easeInOut',
+              ease: "easeInOut",
             }}
             className="absolute font-mono text-neon-cyan/50 text-sm pointer-events-none floating-animation"
           >
