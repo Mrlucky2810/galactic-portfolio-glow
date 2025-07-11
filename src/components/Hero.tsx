@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Github, Linkedin, Mail, Download } from 'lucide-react';
+import { ChevronDown, Github, Linkedin, Mail, Download, Code, Zap, Globe } from 'lucide-react';
 
 const Hero = () => {
   const containerVariants = {
@@ -22,7 +22,7 @@ const Hero = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: "easeOut",
       },
     },
   };
@@ -36,6 +36,16 @@ const Hero = () => {
     'FirebaseAuth.instance.signIn()',
     'useEffect(() => {}, [])',
     'mvn clean install',
+    'class SpringBootApp { }',
+    'flutter create my_app',
+    'git commit -m "feature"',
+    'docker build -t app .',
+  ];
+
+  const stats = [
+    { icon: Code, label: "Projects", value: "15+" },
+    { icon: Zap, label: "Technologies", value: "12+" },
+    { icon: Globe, label: "Deployments", value: "25+" },
   ];
 
   return (
@@ -85,27 +95,68 @@ const Hero = () => {
             className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-space font-bold mb-4 sm:mb-6"
           >
             <span className="text-white">I'm </span>
-            <span className="text-gradient glow-text block sm:inline">
+            <span className="bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink bg-clip-text text-transparent glow-text block sm:inline font-extrabold">
               Shriyan Jaiswal
             </span>
           </motion.h1>
 
-          {/* Typewriter Subtitle */}
+          {/* Dev Tag */}
           <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
-            <div className="text-lg sm:text-xl md:text-2xl text-white/80 font-mono typewriter-effect">
+            <div className="inline-flex items-center justify-center">
+              <span className="text-neon-lime font-mono text-lg sm:text-xl glow-text">
+                {"<"}
+              </span>
+              <span className="text-white font-mono text-lg sm:text-xl mx-2">
+                Dev
+              </span>
+              <span className="text-neon-lime font-mono text-lg sm:text-xl glow-text">
+                {"/>"}
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Typewriter Subtitle - Centered */}
+          <motion.div variants={itemVariants} className="mb-6 sm:mb-8 flex justify-center">
+            <div className="text-lg sm:text-xl md:text-2xl text-white/90 font-mono typewriter-effect text-center">
               Full-Stack • Mobile • Cloud Developer
             </div>
           </motion.div>
 
-          {/* Description */}
+          {/* Enhanced Description */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4"
+            className="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
           >
-            Crafting scalable applications across web, mobile, and cloud platforms. 
-            Specialized in Java enterprise solutions, Flutter cross-platform apps, 
-            and modern React ecosystems with Supabase & Vercel deployment.
+            Passionate about creating scalable applications across web, mobile, and cloud platforms. 
+            Specialized in <span className="text-neon-orange font-semibold">Java enterprise solutions</span>, 
+            <span className="text-neon-purple font-semibold"> Flutter cross-platform apps</span>, 
+            and modern <span className="text-neon-cyan font-semibold">React ecosystems</span> with 
+            Supabase & Vercel deployment.
           </motion.p>
+
+          {/* Stats Section */}
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center mb-8 sm:mb-12">
+            {stats.map((stat, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <div className="p-3 rounded-full border border-neon-cyan/30 bg-neon-cyan/10 mb-2">
+                  <stat.icon className="w-6 h-6 text-neon-cyan" />
+                </div>
+                <div className="text-2xl font-bold text-white">{stat.value}</div>
+                <div className="text-white/70 text-sm">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Tech Stack Highlight */}
+          <motion.div variants={itemVariants} className="mb-8 sm:mb-12">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-2xl mx-auto">
+              {["Java", "Spring Boot", "Flutter", "Firebase", "React", "Supabase", "Vercel", "TypeScript"].map((tech, index) => (
+                <span key={index} className="px-3 py-1 text-xs sm:text-sm bg-gradient-to-r from-neon-cyan/20 to-neon-purple/20 border border-neon-cyan/30 rounded-full text-neon-cyan font-mono">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-16 px-4">
