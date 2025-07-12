@@ -145,7 +145,7 @@ const Hero = () => {
           </motion.div>
 
           {/* CTA Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-16 px-4">
+          <motion.div variants={itemVariants} className="flex sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-16 px-4">
             <motion.button whileHover={{
             scale: 1.05,
             boxShadow: '0 0 30px rgba(0, 229, 255, 0.6)'
