@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Github, Linkedin, Mail, Download, Code, Zap, Globe, Award } from 'lucide-react';
+import { ChevronDown, Github, Linkedin, Mail, Download, Code, Zap, Globe } from 'lucide-react';
 
 const Hero = () => {
   const containerVariants = {
@@ -22,7 +22,6 @@ const Hero = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
       },
     },
   };
@@ -48,6 +47,21 @@ const Hero = () => {
     { icon: Globe, label: "Deployments", value: "25+" },
   ];
 
+  // Typing animation for the subtitle
+  const typingText = "Full-Stack • Mobile • Cloud Developer";
+  const [displayText, setDisplayText] = React.useState("");
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    if (currentIndex < typingText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + typingText[currentIndex]);
+        setCurrentIndex(prev => prev + 1);
+      }, 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, typingText]);
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Floating Code Snippets */}
@@ -66,7 +80,6 @@ const Hero = () => {
               duration: 8,
               repeat: Infinity,
               delay: index * 2,
-              ease: "easeInOut",
             }}
             className="absolute font-mono text-neon-cyan/50 text-xs sm:text-sm pointer-events-none floating-animation"
           >
@@ -126,10 +139,13 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Centered Typewriter Subtitle */}
+          {/* Typing Animation Subtitle */}
           <motion.div variants={itemVariants} className="mb-6 sm:mb-8 flex justify-center">
             <div className="text-lg sm:text-xl md:text-2xl text-white/90 font-mono text-center max-w-2xl">
-              <span className="inline-block">Full-Stack • Mobile • Cloud Developer</span>
+              <span className="inline-block">
+                {displayText}
+                <span className="animate-pulse text-neon-cyan">|</span>
+              </span>
             </div>
           </motion.div>
 

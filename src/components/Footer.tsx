@@ -40,13 +40,14 @@ const Footer = () => {
             viewport={{ once: true }}
             className="lg:col-span-2 md:col-span-2"
           >
-            <div className="text-3xl font-space font-bold text-gradient mb-4">
-              &lt;Shriyan Jaiswal/&gt;
+            <div className="text-3xl font-space font-bold mb-4">
+              <span className="bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink bg-clip-text text-transparent">
+                &lt;Shriyan Jaiswal/&gt;
+              </span>
             </div>
             <p className="text-white/70 mb-6 max-w-md leading-relaxed">
               Full-Stack Developer specializing in Java enterprise solutions, Flutter mobile apps, 
-              and modern React ecosystems. Passionate about creating scalable, user-centric applications 
-              that make a real impact.
+              and modern React ecosystems. Creating scalable, user-centric applications.
             </p>
             
             {/* Contact Info */}
@@ -67,7 +68,7 @@ const Footer = () => {
 
             {/* Social Links */}
             <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
+              {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}
                   href={social.href}
@@ -91,7 +92,7 @@ const Footer = () => {
           >
             <h3 className="text-white font-semibold text-lg mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
+              {quickLinks.map((link) => (
                 <li key={link.name}>
                   <motion.a
                     href={link.href}
@@ -115,7 +116,7 @@ const Footer = () => {
           >
             <h3 className="text-white font-semibold text-lg mb-6">Services</h3>
             <ul className="space-y-3">
-              {services.map((service, index) => (
+              {services.map((service) => (
                 <li key={service}>
                   <motion.div
                     whileHover={{ x: 5 }}
