@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, MapPin, Phone, Heart, ExternalLink } from 'lucide-react';
 
 const Footer = () => {
@@ -29,17 +28,11 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900/95 to-black/95 border-t border-neon-cyan/20">
+    <footer className="bg-gray-900/95 border-t border-neon-cyan/20">
       <div className="container mx-auto px-6 py-16">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12">
           {/* Brand Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="lg:col-span-2 md:col-span-2"
-          >
+          <div className="lg:col-span-2 md:col-span-2">
             <div className="text-3xl font-space font-bold mb-4">
               <span className="bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink bg-clip-text text-transparent">
                 &lt;Shriyan Jaiswal/&gt;
@@ -69,75 +62,54 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
-                <motion.a
+                <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
                   className="p-2 rounded-full border border-neon-cyan/30 hover:border-neon-cyan hover:bg-neon-cyan/10 transition-all duration-300 group"
                 >
                   <social.icon className="w-5 h-5 text-neon-cyan group-hover:text-white" />
-                </motion.a>
+                </a>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <h3 className="text-white font-semibold text-lg mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <motion.a
+                  <a
                     href={link.href}
-                    whileHover={{ x: 5 }}
                     className="text-white/70 hover:text-neon-cyan transition-colors duration-300 flex items-center gap-2 group"
                   >
                     <span>{link.name}</span>
                     <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </motion.a>
+                  </a>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <h3 className="text-white font-semibold text-lg mb-6">Services</h3>
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service}>
-                  <motion.div
-                    whileHover={{ x: 5 }}
-                    className="text-white/70 hover:text-neon-cyan transition-colors duration-300"
-                  >
+                  <div className="text-white/70 hover:text-neon-cyan transition-colors duration-300">
                     {service}
-                  </motion.div>
+                  </div>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="border-t border-neon-cyan/20 mt-12 pt-8"
-        >
+        <div className="border-t border-neon-cyan/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-white/60 text-sm">
               © {currentYear} Shriyan Jaiswal. All rights reserved.
@@ -145,28 +117,26 @@ const Footer = () => {
             
             <div className="flex items-center gap-1 text-white/60 text-sm">
               <span>Made with</span>
-              <Heart className="w-4 h-4 text-red-500 animate-pulse" />
+              <Heart className="w-4 h-4 text-red-500" />
               <span>using React & TypeScript</span>
             </div>
             
             <div className="flex space-x-6 text-sm">
-              <motion.a
+              <a
                 href="#privacy"
-                whileHover={{ y: -2 }}
                 className="text-white/60 hover:text-neon-cyan transition-colors"
               >
                 Privacy Policy
-              </motion.a>
-              <motion.a
+              </a>
+              <a
                 href="#terms"
-                whileHover={{ y: -2 }}
                 className="text-white/60 hover:text-neon-cyan transition-colors"
               >
                 Terms of Service
-              </motion.a>
+              </a>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

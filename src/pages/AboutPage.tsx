@@ -1,13 +1,15 @@
 
 import React from 'react';
 import About from '../components/About';
-import Timeline from '../components/Timeline';
+import Academic from '../components/Academic';
+import Certificates from '../components/Certificates';
 
 const AboutPage = () => {
   return (
     <div className="min-h-screen pt-16">
       <About />
-      <Timeline />
+      <Academic />
+      <Certificates />
     </div>
   );
 };
