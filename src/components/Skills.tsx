@@ -22,24 +22,36 @@ const Skills = () => {
       title: 'Backend',
       color: 'neon-purple',
       skills: [
+        { name: 'Java', level: 95, icon: '☕' },
+        { name: 'Spring Boot', level: 92, icon: '🚀' },
         { name: 'Node.js', level: 88, icon: '🟢' },
-        { name: 'Python', level: 85, icon: '🐍' },
-        { name: 'PostgreSQL', level: 82, icon: '🐘' },
+        { name: 'PostgreSQL', level: 85, icon: '🐘' },
         { name: 'MongoDB', level: 80, icon: '🍃' },
-        { name: 'GraphQL', level: 78, icon: '🔗' },
-        { name: 'Docker', level: 83, icon: '🐳' },
+        { name: 'Supabase', level: 90, icon: '⚡' },
+      ],
+    },
+    mobile: {
+      title: 'Mobile',
+      color: 'neon-pink',
+      skills: [
+        { name: 'Flutter', level: 93, icon: '🎯' },
+        { name: 'Dart', level: 90, icon: '💙' },
+        { name: 'Firebase', level: 88, icon: '🔥' },
+        { name: 'React Native', level: 75, icon: '📱' },
+        { name: 'Android', level: 80, icon: '🤖' },
+        { name: 'iOS', level: 70, icon: '🍎' },
       ],
     },
     tools: {
-      title: 'Tools & Others',
-      color: 'neon-pink',
+      title: 'Development Tools',
+      color: 'neon-orange',
       skills: [
         { name: 'Git', level: 90, icon: '📦' },
+        { name: 'Docker', level: 83, icon: '🐳' },
         { name: 'AWS', level: 75, icon: '☁️' },
-        { name: 'Figma', level: 88, icon: '🎯' },
+        { name: 'Vercel', level: 88, icon: '▲' },
         { name: 'VSCode', level: 95, icon: '💻' },
-        { name: 'Linux', level: 80, icon: '🐧' },
-        { name: 'Webpack', level: 82, icon: '📦' },
+        { name: 'IntelliJ IDEA', level: 90, icon: '🧠' },
       ],
     },
   };
@@ -73,14 +85,18 @@ const Skills = () => {
           viewport={{ once: true }}
           className="flex justify-center mb-16"
         >
-          <div className="flex bg-gradient-dark/50 backdrop-blur-sm rounded-xl p-2 border border-white/10">
+          <div className="flex bg-gradient-dark/50 backdrop-blur-sm rounded-xl p-2 border border-white/10 flex-wrap justify-center">
             {categories.map(([key, category]) => (
               <button
                 key={key}
                 onClick={() => setSelectedCategory(key)}
-                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                className={`px-4 sm:px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base ${
                   selectedCategory === key
-                    ? `bg-${category.color} text-black shadow-lg`
+                    ? key === 'frontend' ? 'bg-neon-cyan text-black shadow-lg'
+                    : key === 'backend' ? 'bg-neon-purple text-black shadow-lg'
+                    : key === 'mobile' ? 'bg-neon-pink text-black shadow-lg'
+                    : key === 'tools' ? 'bg-neon-orange text-black shadow-lg'
+                    : 'bg-neon-cyan text-black shadow-lg'
                     : 'text-white/70 hover:text-white'
                 }`}
               >
@@ -123,7 +139,13 @@ const Skills = () => {
                     initial={{ width: 0 }}
                     animate={{ width: `${skill.level}%` }}
                     transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
-                    className={`h-full bg-gradient-to-r from-${skillCategories[selectedCategory as keyof typeof skillCategories].color} to-neon-pink rounded-full`}
+                    className={`h-full rounded-full ${
+                      selectedCategory === 'frontend' ? 'bg-gradient-to-r from-neon-cyan to-neon-blue'
+                      : selectedCategory === 'backend' ? 'bg-gradient-to-r from-neon-purple to-neon-pink'
+                      : selectedCategory === 'mobile' ? 'bg-gradient-to-r from-neon-pink to-neon-purple'
+                      : selectedCategory === 'tools' ? 'bg-gradient-to-r from-neon-orange to-neon-yellow'
+                      : 'bg-gradient-to-r from-neon-cyan to-neon-purple'
+                    }`}
                   />
                 </div>
                 
@@ -137,7 +159,7 @@ const Skills = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Interactive 3D Skills Orbit - Placeholder */}
+        {/* Interactive 3D Skills Orbit */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -151,7 +173,7 @@ const Skills = () => {
                 <div className="absolute inset-4 bg-gradient-dark/50 rounded-full flex items-center justify-center">
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                     className="text-4xl text-gradient font-bold"
                   >
                     &lt;Code/&gt;
@@ -161,14 +183,14 @@ const Skills = () => {
             </div>
             
             {/* Orbiting Icons */}
-            {['⚛️', '🔷', '🐍', '🎨', '🚀', '💻'].map((icon, index) => (
+            {['⚛️', '☕', '🎯', '🔷', '🚀', '💻'].map((icon, index) => (
               <motion.div
                 key={index}
                 animate={{ rotate: 360 }}
                 transition={{ 
                   duration: 10 + index * 2, 
                   repeat: Infinity, 
-                  ease: 'linear',
+                  ease: "linear",
                   delay: index * 0.5 
                 }}
                 className="absolute w-12 h-12 bg-gradient-dark/80 backdrop-blur-sm rounded-full flex items-center justify-center border border-neon-cyan/30"

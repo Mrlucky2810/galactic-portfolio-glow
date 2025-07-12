@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Github, Linkedin, Mail, Download, Code, Zap, Globe } from 'lucide-react';
+import { ChevronDown, Github, Linkedin, Mail, Download, Code, Zap, Globe, Award } from 'lucide-react';
 
 const Hero = () => {
   const containerVariants = {
@@ -22,7 +22,7 @@ const Hero = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
+        ease: [0.25, 0.1, 0.25, 1],
       },
     },
   };
@@ -66,7 +66,7 @@ const Hero = () => {
               duration: 8,
               repeat: Infinity,
               delay: index * 2,
-              ease: "easeInOut",
+              ease: [0.25, 0.1, 0.25, 1],
             }}
             className="absolute font-mono text-neon-cyan/50 text-xs sm:text-sm pointer-events-none floating-animation"
           >
@@ -82,6 +82,17 @@ const Hero = () => {
           animate="visible"
           className="text-center"
         >
+          {/* Profile Photo */}
+          <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-neon-cyan/50 shadow-lg shadow-neon-cyan/20">
+              <img 
+                src="/placeholder.svg" 
+                alt="Shriyan Jaiswal" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+
           {/* Greeting */}
           <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
             <span className="text-neon-cyan font-mono text-sm sm:text-lg glow-text">
@@ -106,7 +117,7 @@ const Hero = () => {
               <span className="text-neon-lime font-mono text-lg sm:text-xl glow-text">
                 {"<"}
               </span>
-              <span className="text-white font-mono text-lg sm:text-xl mx-2">
+              <span className="text-neon-orange font-mono text-lg sm:text-xl mx-2 glow-text">
                 Dev
               </span>
               <span className="text-neon-lime font-mono text-lg sm:text-xl glow-text">
@@ -115,24 +126,12 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Typewriter Subtitle - Centered */}
-          <motion.div variants={itemVariants} className="mb-6 sm:mb-8 flex justify-center">
-            <div className="text-lg sm:text-xl md:text-2xl text-white/90 font-mono typewriter-effect text-center">
-              Full-Stack • Mobile • Cloud Developer
+          {/* Centered Typewriter Subtitle */}
+          <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
+            <div className="text-lg sm:text-xl md:text-2xl text-white/90 font-mono text-center max-w-2xl mx-auto">
+              <span className="inline-block">Full-Stack • Mobile • Cloud Developer</span>
             </div>
           </motion.div>
-
-          {/* Enhanced Description */}
-          <motion.p
-            variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4"
-          >
-            Passionate about creating scalable applications across web, mobile, and cloud platforms. 
-            Specialized in <span className="text-neon-orange font-semibold">Java enterprise solutions</span>, 
-            <span className="text-neon-purple font-semibold"> Flutter cross-platform apps</span>, 
-            and modern <span className="text-neon-cyan font-semibold">React ecosystems</span> with 
-            Supabase & Vercel deployment.
-          </motion.p>
 
           {/* Stats Section */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center mb-8 sm:mb-12">

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Navigation from '../components/Navigation';
 import AnimatedBackground from '../components/AnimatedBackground';
+import Footer from '../components/Footer';
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import SkillsPage from './SkillsPage';
@@ -40,6 +41,9 @@ const Index = () => {
       <main className="relative z-10">
         {renderPage()}
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
