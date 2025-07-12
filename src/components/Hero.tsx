@@ -78,7 +78,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6 z-20 relative">
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="text-center">
           {/* Profile Photo */}
-          <motion.div variants={itemVariants} className="mb-6 sm:mb-8 py-[80px]">
+          <motion.div variants={itemVariants} className="mb-6 sm:mb-8 py-0 my-0 pt-18 ">
             <div className="w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-neon-cyan/50 shadow-lg shadow-neon-cyan/20">
               <img src="/placeholder.svg" alt="Shriyan Jaiswal" className="w-full h-full object-cover" />
             </div>
