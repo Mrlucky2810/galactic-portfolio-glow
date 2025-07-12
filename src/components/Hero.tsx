@@ -125,7 +125,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Stats Section */}
-          <motion.div variants={itemVariants} className="flex flex-row gap-8 justify-center mb-12">
+          <motion.div variants={itemVariants} className="flex flex-row justify-evenly mb-12 p-5">
             {stats.map((stat, index) => <div key={index} className="flex flex-col items-center">
                 <div className="p-3 rounded-full border border-neon-cyan/30 bg-neon-cyan/10 mb-2">
                   <stat.icon className="w-6 h-6 text-neon-cyan" />
