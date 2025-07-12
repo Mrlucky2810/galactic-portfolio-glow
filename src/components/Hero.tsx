@@ -22,7 +22,7 @@ const Hero = () => {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: "easeOut",
       },
     },
   };
@@ -66,7 +66,7 @@ const Hero = () => {
               duration: 8,
               repeat: Infinity,
               delay: index * 2,
-              ease: [0.25, 0.1, 0.25, 1],
+              ease: "easeInOut",
             }}
             className="absolute font-mono text-neon-cyan/50 text-xs sm:text-sm pointer-events-none floating-animation"
           >
@@ -106,7 +106,7 @@ const Hero = () => {
             className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-space font-bold mb-4 sm:mb-6"
           >
             <span className="text-white">I'm </span>
-            <span className="bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink bg-clip-text text-transparent glow-text block sm:inline font-extrabold">
+            <span className="bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink bg-clip-text text-transparent glow-text block sm:inline font-extrabold drop-shadow-lg">
               Shriyan Jaiswal
             </span>
           </motion.h1>
@@ -114,21 +114,21 @@ const Hero = () => {
           {/* Dev Tag */}
           <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
             <div className="inline-flex items-center justify-center">
-              <span className="text-neon-lime font-mono text-lg sm:text-xl glow-text">
+              <span className="text-neon-lime font-mono text-lg sm:text-xl glow-text drop-shadow-lg">
                 {"<"}
               </span>
-              <span className="text-neon-orange font-mono text-lg sm:text-xl mx-2 glow-text">
+              <span className="text-neon-orange font-mono text-lg sm:text-xl mx-2 glow-text drop-shadow-lg">
                 Dev
               </span>
-              <span className="text-neon-lime font-mono text-lg sm:text-xl glow-text">
+              <span className="text-neon-lime font-mono text-lg sm:text-xl glow-text drop-shadow-lg">
                 {"/>"}
               </span>
             </div>
           </motion.div>
 
           {/* Centered Typewriter Subtitle */}
-          <motion.div variants={itemVariants} className="mb-6 sm:mb-8">
-            <div className="text-lg sm:text-xl md:text-2xl text-white/90 font-mono text-center max-w-2xl mx-auto">
+          <motion.div variants={itemVariants} className="mb-6 sm:mb-8 flex justify-center">
+            <div className="text-lg sm:text-xl md:text-2xl text-white/90 font-mono text-center max-w-2xl">
               <span className="inline-block">Full-Stack • Mobile • Cloud Developer</span>
             </div>
           </motion.div>
