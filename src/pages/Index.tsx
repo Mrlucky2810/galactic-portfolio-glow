@@ -1,10 +1,9 @@
 
 import React, { useState } from 'react';
 import Navigation from '../components/Navigation';
-import Enhanced3DBackground from '../components/Enhanced3DBackground';
-import EnhancedFooter from '../components/EnhancedFooter';
-import SmoothScroll from '../components/SmoothScroll';
-import PerformantHero from '../components/PerformantHero';
+import AnimatedBackground from '../components/AnimatedBackground';
+import Footer from '../components/Footer';
+import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import SkillsPage from './SkillsPage';
 import ProjectsPage from './ProjectsPage';
@@ -16,7 +15,7 @@ const Index = () => {
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <PerformantHero />;
+        return <HomePage />;
       case 'about':
         return <AboutPage />;
       case 'skills':
@@ -26,28 +25,26 @@ const Index = () => {
       case 'contact':
         return <ContactPage />;
       default:
-        return <PerformantHero />;
+        return <HomePage />;
     }
   };
 
   return (
-    <SmoothScroll>
-      <div className="min-h-screen relative">
-        {/* Enhanced 3D Background */}
-        <Enhanced3DBackground />
-        
-        {/* Navigation */}
-        <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        
-        {/* Main Content */}
-        <main className="relative z-10">
-          {renderPage()}
-        </main>
+    <div className="min-h-screen relative">
+      {/* Beautiful Animated Background */}
+      <AnimatedBackground />
+      
+      {/* Navigation */}
+      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      
+      {/* Main Content */}
+      <main className="relative z-10">
+        {renderPage()}
+      </main>
 
-        {/* Enhanced Footer */}
-        <EnhancedFooter />
-      </div>
-    </SmoothScroll>
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 };
 
