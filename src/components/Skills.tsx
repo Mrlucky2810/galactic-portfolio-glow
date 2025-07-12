@@ -1,9 +1,39 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useGSAP, gsap } from '../hooks/useGSAP';
 
 const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState('frontend');
+  
+  const skillsRef = useGSAP(() => {
+    gsap.fromTo('.skill-card', 
+      { opacity: 0, y: 50 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: '.skills-grid',
+          start: 'top 80%',
+          end: 'bottom 20%',
+        }
+      }
+    );
+
+    gsap.fromTo('.spline-frame',
+      { opacity: 0, scale: 0.8 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: '.spline-frame',
+          start: 'top 80%',
+        }
+      }
+    );
+  }, [selectedCategory]);
 
   const skillCategories = {
     frontend: {
@@ -59,7 +89,7 @@ const Skills = () => {
   const categories = Object.entries(skillCategories);
 
   return (
-    <section id="skills" className="py-20 relative">
+    <section id="skills" className="py-20 relative" ref={skillsRef}>
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -76,6 +106,26 @@ const Skills = () => {
             A comprehensive toolkit built through years of experience and continuous learning
           </p>
         </motion.div>
+
+        {/* 3D Spline Frame */}
+        <div className="spline-frame mb-16">
+          <div className="relative w-full max-w-4xl mx-auto h-96 bg-gradient-dark/30 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-neon rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <div className="w-8 h-8 bg-white/20 rounded-full animate-pulse" />
+                </div>
+                <p className="text-white/60 text-sm">3D Skills Visualization</p>
+                <p className="text-white/40 text-xs mt-2">Spline 3D model will be embedded here</p>
+              </div>
+            </div>
+            
+            {/* Frame Border Effect */}
+            <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-neon-cyan via-neon-purple to-neon-pink rounded-xl opacity-20">
+              <div className="w-full h-full bg-gradient-dark rounded-xl" />
+            </div>
+          </div>
+        </div>
 
         {/* Category Selector */}
         <motion.div
@@ -107,57 +157,59 @@ const Skills = () => {
         </motion.div>
 
         {/* Skills Grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={selectedCategory}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.5 }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {skillCategories[selectedCategory as keyof typeof skillCategories].skills.map((skill, index) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="p-6 bg-gradient-dark/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-neon-cyan/50 transition-all duration-300"
-              >
-                <div className="flex items-center mb-4">
-                  <span className="text-3xl mr-3">{skill.icon}</span>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white">{skill.name}</h3>
-                    <span className="text-neon-cyan font-mono text-sm">{skill.level}%</span>
+        <div className="skills-grid">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedCategory}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.5 }}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {skillCategories[selectedCategory as keyof typeof skillCategories].skills.map((skill, index) => (
+                <motion.div
+                  key={skill.name}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="skill-card p-6 bg-gradient-dark/30 backdrop-blur-sm rounded-xl border border-white/10 hover:border-neon-cyan/50 transition-all duration-300"
+                >
+                  <div className="flex items-center mb-4">
+                    <span className="text-3xl mr-3">{skill.icon}</span>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white">{skill.name}</h3>
+                      <span className="text-neon-cyan font-mono text-sm">{skill.level}%</span>
+                    </div>
                   </div>
-                </div>
-                
-                {/* Progress Bar */}
-                <div className="w-full bg-white/10 rounded-full h-2 mb-4">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${skill.level}%` }}
-                    transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
-                    className={`h-full rounded-full ${
-                      selectedCategory === 'frontend' ? 'bg-gradient-to-r from-neon-cyan to-neon-blue'
-                      : selectedCategory === 'backend' ? 'bg-gradient-to-r from-neon-purple to-neon-pink'
-                      : selectedCategory === 'mobile' ? 'bg-gradient-to-r from-neon-pink to-neon-purple'
-                      : selectedCategory === 'tools' ? 'bg-gradient-to-r from-neon-orange to-neon-yellow'
-                      : 'bg-gradient-to-r from-neon-cyan to-neon-purple'
-                    }`}
-                  />
-                </div>
-                
-                {/* Skill Level Indicator */}
-                <div className="flex justify-between text-sm text-white/60">
-                  <span>Beginner</span>
-                  <span>Expert</span>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
+                  
+                  {/* Progress Bar */}
+                  <div className="w-full bg-white/10 rounded-full h-2 mb-4">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${skill.level}%` }}
+                      transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
+                      className={`h-full rounded-full ${
+                        selectedCategory === 'frontend' ? 'bg-gradient-to-r from-neon-cyan to-neon-blue'
+                        : selectedCategory === 'backend' ? 'bg-gradient-to-r from-neon-purple to-neon-pink'
+                        : selectedCategory === 'mobile' ? 'bg-gradient-to-r from-neon-pink to-neon-purple'
+                        : selectedCategory === 'tools' ? 'bg-gradient-to-r from-neon-orange to-neon-yellow'
+                        : 'bg-gradient-to-r from-neon-cyan to-neon-purple'
+                      }`}
+                    />
+                  </div>
+                  
+                  {/* Skill Level Indicator */}
+                  <div className="flex justify-between text-sm text-white/60">
+                    <span>Beginner</span>
+                    <span>Expert</span>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
         {/* Interactive 3D Skills Orbit */}
         <motion.div

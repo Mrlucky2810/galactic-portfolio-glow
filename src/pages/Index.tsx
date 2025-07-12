@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import Navigation from '../components/Navigation';
 import AnimatedBackground from '../components/AnimatedBackground';
-import Footer from '../components/Footer';
+import SimpleFooter from '../components/SimpleFooter';
+import SmoothScroll from '../components/SmoothScroll';
 import HomePage from './HomePage';
 import AboutPage from './AboutPage';
 import SkillsPage from './SkillsPage';
@@ -30,21 +31,23 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen relative">
-      {/* Beautiful Animated Background */}
-      <AnimatedBackground />
-      
-      {/* Navigation */}
-      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      
-      {/* Main Content */}
-      <main className="relative z-10">
-        {renderPage()}
-      </main>
+    <SmoothScroll>
+      <div className="min-h-screen relative">
+        {/* Beautiful Animated Background */}
+        <AnimatedBackground />
+        
+        {/* Navigation */}
+        <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        
+        {/* Main Content */}
+        <main className="relative z-10" data-scroll-section>
+          {renderPage()}
+        </main>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <SimpleFooter />
+      </div>
+    </SmoothScroll>
   );
 };
 
