@@ -1,87 +1,20 @@
-//
-// import React, { useRef, useMemo } from 'react';
-// import { Canvas, useFrame } from '@react-three/fiber';
-// import { Points, PointMaterial } from '@react-three/drei';
-// import * as THREE from 'three';
-//
-// const Stars = ({ count = 5000 }) => {
-//   const ref = useRef<THREE.Points>(null);
-//
-//   const [positions, colors] = useMemo(() => {
-//     const positions = new Float32Array(count * 3);
-//     const colors = new Float32Array(count * 3);
-//
-//     for (let i = 0; i < count; i++) {
-//       // Random sphere distribution
-//       const radius = Math.random() * 25 + 5;
-//       const theta = Math.random() * Math.PI * 2;
-//       const phi = Math.acos(2 * Math.random() - 1);
-//
-//       positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
-//       positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-//       positions[i * 3 + 2] = radius * Math.cos(phi);
-//
-//       // Neon colors
-//       const colorChoice = Math.random();
-//       if (colorChoice < 0.33) {
-//         colors[i * 3] = 0;     // R
-//         colors[i * 3 + 1] = 229 / 255; // G
-//         colors[i * 3 + 2] = 255 / 255; // B (cyan)
-//       } else if (colorChoice < 0.66) {
-//         colors[i * 3] = 199 / 255;     // R
-//         colors[i * 3 + 1] = 125 / 255; // G
-//         colors[i * 3 + 2] = 255 / 255; // B (purple)
-//       } else {
-//         colors[i * 3] = 255 / 255;     // R
-//         colors[i * 3 + 1] = 60 / 255;  // G
-//         colors[i * 3 + 2] = 172 / 255; // B (pink)
-//       }
-//     }
-//
-//     return [positions, colors];
-//   }, [count]);
-//
-//   useFrame((state) => {
-//     if (ref.current) {
-//       ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
-//       ref.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
-//     }
-//   });
-//
-//   return (
-//     <Points ref={ref} positions={positions} colors={colors} stride={3} frustumCulled={false}>
-//       <PointMaterial
-//         transparent
-//         vertexColors
-//         size={0.8}
-//         sizeAttenuation={true}
-//         depthWrite={false}
-//         blending={THREE.AdditiveBlending}
-//       />
-//     </Points>
-//   );
-// };
-//
-// const StarField = () => {
-//   return (
-//     <div className="fixed inset-0 z-0">
-//       <Canvas camera={{ position: [0, 0, 1] }}>
-//         <Stars />
-//       </Canvas>
-//     </div>
-//   );
-// };
-//
-// export default StarField;
-
-'use client';
-
+// src/components/StarField.tsx
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
+interface Star {
+  x: number;
+  y: number;
+  z: number;
+  size: number;
+  speed: number;
+  color: string;
+}
+
 export default function StarField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
+  const animationRef = useRef<number>();
+  const starsRef = useRef<Star[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -89,15 +22,6 @@ export default function StarField() {
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
-    const stars: Array<{
-      x: number;
-      y: number;
-      z: number;
-      size: number;
-      speed: number;
-      color: string;
-    }> = [];
 
     const colors = ['#00e5ff', '#c77dff', '#ff3cac', '#00ffab'];
 
@@ -107,8 +31,9 @@ export default function StarField() {
     };
 
     const createStars = () => {
-      for (let i = 0; i < 200; i++) {
-        stars.push({
+      starsRef.current = [];
+      for (let i = 0; i < 150; i++) {
+        starsRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           z: Math.random() * 1000,
@@ -121,18 +46,20 @@ export default function StarField() {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.save();
 
-      stars.forEach((star) => {
+      starsRef.current.forEach((star) => {
         const x = (star.x - canvas.width / 2) * (1000 / star.z) + canvas.width / 2;
         const y = (star.y - canvas.height / 2) * (1000 / star.z) + canvas.height / 2;
         const size = star.size * (1000 / star.z);
 
-        if (x >= 0 && x <= canvas.width && y >= 0 && y <= canvas.height) {
+        if (x >= 0 && x <= canvas.width && y >= 0 && y <= canvas.height && size > 0.1) {
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fillStyle = star.color;
-          ctx.shadowBlur = 10;
+          ctx.shadowBlur = 5;
           ctx.shadowColor = star.color;
+          ctx.globalAlpha = Math.min(1, (1000 - star.z) / 1000);
           ctx.fill();
         }
 
@@ -144,23 +71,26 @@ export default function StarField() {
         }
       });
 
-      requestAnimationFrame(animate);
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
+      ctx.restore();
+      animationRef.current = requestAnimationFrame(animate);
     };
 
     resizeCanvas();
     createStars();
     animate();
 
-    window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('mousemove', handleMouseMove);
+    const handleResize = () => {
+      resizeCanvas();
+      createStars();
+    };
+
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
   }, []);
 
@@ -171,6 +101,7 @@ export default function StarField() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2 }}
+          style={{ willChange: 'transform' }}
       />
   );
 }

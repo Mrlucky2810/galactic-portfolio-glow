@@ -1,5 +1,4 @@
-'use client';
-
+// src/pages/AboutPage.tsx
 import {motion} from 'framer-motion';
 import StarField from '@/components/StarField';
 
@@ -40,19 +39,19 @@ export default function AboutPage() {
     ];
 
     const personalInfo = [
-        {label: 'Location', value: 'Varanasi, India', icon: 'ri-map-pin-line'},
-        {label: 'Email', value: 'shriyan.jaiswal0906@gmail.com', icon: 'ri-mail-line'},
-        {label: 'Languages', value: 'English, Hindi', icon: 'ri-global-line'},
-        {label: 'Availability', value: 'Available for projects', icon: 'ri-time-line'},
+        {label: 'Location', value: 'Varanasi, India', icon: '📍'},
+        {label: 'Email', value: 'shriyan.jaiswal0906@gmail.com', icon: '📧'},
+        {label: 'Languages', value: 'English, Hindi', icon: '🌐'},
+        {label: 'Availability', value: 'Available for projects', icon: '⏰'},
     ];
 
     const interests = [
-        {name: 'Mobile Development', icon: 'ri-smartphone-line', description: 'Creating beautiful cross-platform apps'},
-        {name: 'Backend Architecture', icon: 'ri-server-line', description: 'Designing scalable Java applications'},
-        {name: 'Web Development', icon: 'ri-window-line', description: 'Building modern React applications'},
-        {name: 'Firebase & Supabase', icon: 'ri-database-line', description: 'Working with modern backend services'},
-        {name: 'Open Source', icon: 'ri-code-line', description: 'Contributing to open source projects'},
-        {name: 'Tech Innovation', icon: 'ri-lightbulb-line', description: 'Exploring new technologies and trends'},
+        {name: 'Mobile Development', icon: '📱', description: 'Creating beautiful cross-platform apps'},
+        {name: 'Backend Architecture', icon: '🖥️', description: 'Designing scalable Java applications'},
+        {name: 'Web Development', icon: '🌐', description: 'Building modern React applications'},
+        {name: 'Firebase & Supabase', icon: '🗄️', description: 'Working with modern backend services'},
+        {name: 'Open Source', icon: '💻', description: 'Contributing to open source projects'},
+        {name: 'Tech Innovation', icon: '💡', description: 'Exploring new technologies and trends'},
     ];
 
     const technologies = [
@@ -77,7 +76,7 @@ export default function AboutPage() {
                         transition={{duration: 0.8}}
                         className="text-center mb-16 sm:mb-20"
                     >
-                        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold font-space-grotesk mb-6">
+                        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold font-space mb-6">
               <span
                   className="bg-gradient-to-r from-[#00e5ff] via-[#c77dff] to-[#ff3cac] bg-clip-text text-transparent">
                 About Me
@@ -108,9 +107,11 @@ export default function AboutPage() {
                                     className="bg-[#1a1a3a]/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-[#00e5ff]/20 hover:border-[#00e5ff]/40 transition-all duration-300 text-center"
                                 >
                                     <div className="mb-4">
-                                        <i className={`${info.icon} text-2xl sm:text-3xl text-[#00e5ff] w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center mx-auto`}></i>
+                                        <div className="text-2xl sm:text-3xl w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center mx-auto">
+                                            {info.icon}
+                                        </div>
                                     </div>
-                                    <h3 className="text-base sm:text-lg font-bold text-white mb-2 font-space-grotesk">
+                                    <h3 className="text-base sm:text-lg font-bold text-white mb-2 font-space">
                                         {info.label}
                                     </h3>
                                     <p className="text-white/70 font-inter text-sm sm:text-base">
@@ -130,7 +131,7 @@ export default function AboutPage() {
                         className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center mb-16 sm:mb-20"
                     >
                         <div className="order-2 lg:order-1">
-                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space-grotesk mb-6">
+                            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space mb-6">
                 <span className="bg-gradient-to-r from-[#00e5ff] to-[#c77dff] bg-clip-text text-transparent">
                   My Story
                 </span>
@@ -138,7 +139,7 @@ export default function AboutPage() {
                             <div
                                 className="space-y-4 sm:space-y-6 text-white/70 font-inter leading-relaxed text-sm sm:text-base">
                                 <p>
-                                    I’m Shriyan Jaiswal, a full-stack developer, creative problem-solver, and digital
+                                    I'm Shriyan Jaiswal, a full-stack developer, creative problem-solver, and digital
                                     storyteller—obsessed with turning bold ideas into scalable experiences.
                                 </p>
                                 <p>
@@ -149,13 +150,13 @@ export default function AboutPage() {
                                     responsive, high-performance platforms.
                                 </p>
                                 <p>
-                                    Whether I’m prototyping a crypto trading dashboard, designing a spiritual tourism
+                                    Whether I'm prototyping a crypto trading dashboard, designing a spiritual tourism
                                     portal, or engineering a cinematic user interface, my goal remains the same: to
                                     merge code with emotion, usability with wow-factor.
 
                                 </p>
                                 <p>
-                                    Beyond the syntax and frameworks, I’m passionate about innovation, branding, and
+                                    Beyond the syntax and frameworks, I'm passionate about innovation, branding, and
                                     pushing digital boundaries. I collaborate with startups and businesses to bring
                                     ideas to life.
                                 </p>
@@ -165,12 +166,11 @@ export default function AboutPage() {
 
                         <div className="order-1 lg:order-2 relative">
                             <div
-                                className="w-full h-64 sm:h-80 lg:h-96 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#00e5ff]/30">
-                                <img
-                                    src="https://readdy.ai/api/search-image?query=professional%20Indian%20software%20developer%20workspace%2C%20modern%20setup%20with%20multiple%20monitors%2C%20Java%20Flutter%20React%20development%20environment%2C%20coding%20atmosphere%2C%20tech%20workspace%2C%20programmer%20desk%20setup&width=600&height=400&seq=about-workspace-shriyan&orientation=landscape"
-                                    alt="Shriyan's Development Workspace"
-                                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
-                                />
+                                className="w-full h-64 sm:h-80 lg:h-96 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#00e5ff]/30 bg-gradient-to-br from-[#00e5ff]/20 to-[#c77dff]/20 flex items-center justify-center">
+                                <div className="text-center">
+                                    <div className="text-6xl sm:text-8xl mb-4">👨‍💻</div>
+                                    <p className="text-white/70 text-sm sm:text-base">Developer Workspace</p>
+                                </div>
                             </div>
                             <div
                                 className="absolute inset-0 bg-gradient-to-t from-[#00e5ff]/10 to-transparent rounded-xl sm:rounded-2xl"/>
@@ -196,7 +196,7 @@ export default function AboutPage() {
                                     whileHover={{scale: 1.05, y: -5}}
                                     className="text-center p-4 sm:p-6 bg-[#1a1a3a]/50 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-[#00e5ff]/20 hover:border-[#00e5ff]/40 transition-all duration-300"
                                 >
-                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space-grotesk mb-2"
+                                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space mb-2"
                                          style={{color: stat.color}}>
                                         {stat.number}
                                     </div>
@@ -216,7 +216,7 @@ export default function AboutPage() {
                         transition={{duration: 0.8}}
                         className="mb-16 sm:mb-20"
                     >
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space-grotesk text-center mb-12 sm:mb-16">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space text-center mb-12 sm:mb-16">
               <span className="bg-gradient-to-r from-[#00e5ff] to-[#c77dff] bg-clip-text text-transparent">
                 Technology Proficiency
               </span>
@@ -234,7 +234,7 @@ export default function AboutPage() {
                                     className="bg-[#1a1a3a]/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-[#00e5ff]/20 hover:border-[#00e5ff]/40 transition-all duration-300"
                                 >
                                     <div className="flex justify-between items-center mb-4">
-                                        <h3 className="text-lg sm:text-xl font-bold text-white font-space-grotesk">
+                                        <h3 className="text-lg sm:text-xl font-bold text-white font-space">
                                             {tech.name}
                                         </h3>
                                         <span className="text-base sm:text-lg font-bold" style={{color: tech.color}}>
@@ -264,7 +264,7 @@ export default function AboutPage() {
                         transition={{duration: 0.8}}
                         className="mb-16 sm:mb-20"
                     >
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space-grotesk text-center mb-12 sm:mb-16">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space text-center mb-12 sm:mb-16">
               <span className="bg-gradient-to-r from-[#00e5ff] to-[#c77dff] bg-clip-text text-transparent">
                 My Journey
               </span>
@@ -292,10 +292,10 @@ export default function AboutPage() {
                                             className="bg-[#1a1a3a]/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-[#00e5ff]/20 hover:border-[#00e5ff]/40 transition-all duration-300"
                                         >
                                             <div
-                                                className="text-[#00e5ff] font-bold text-base sm:text-lg lg:text-xl mb-2 font-space-grotesk">
+                                                className="text-[#00e5ff] font-bold text-base sm:text-lg lg:text-xl mb-2 font-space">
                                                 {milestone.year}
                                             </div>
-                                            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white mb-3 font-space-grotesk">
+                                            <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white mb-3 font-space">
                                                 {milestone.title}
                                             </h3>
                                             <p className="text-white/70 font-inter text-sm sm:text-base">
@@ -321,7 +321,7 @@ export default function AboutPage() {
                         transition={{duration: 0.8}}
                         className="mb-16 sm:mb-20"
                     >
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space-grotesk text-center mb-12 sm:mb-16">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space text-center mb-12 sm:mb-16">
               <span className="bg-gradient-to-r from-[#00e5ff] to-[#c77dff] bg-clip-text text-transparent">
                 Interests & Passions
               </span>
@@ -339,9 +339,11 @@ export default function AboutPage() {
                                     className="text-center p-6 sm:p-8 bg-[#1a1a3a]/50 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-[#00e5ff]/20 hover:border-[#00e5ff]/40 transition-all duration-300"
                                 >
                                     <div className="mb-6">
-                                        <i className={`${interest.icon} text-3xl sm:text-4xl text-[#00e5ff] w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mx-auto`}></i>
+                                        <div className="text-3xl sm:text-4xl w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mx-auto">
+                                            {interest.icon}
+                                        </div>
                                     </div>
-                                    <h3 className="text-lg sm:text-xl font-bold text-white mb-4 font-space-grotesk">
+                                    <h3 className="text-lg sm:text-xl font-bold text-white mb-4 font-space">
                                         {interest.name}
                                     </h3>
                                     <p className="text-white/70 font-inter text-sm sm:text-base">
@@ -360,7 +362,7 @@ export default function AboutPage() {
                         transition={{duration: 0.8}}
                         className="mb-16 sm:mb-20"
                     >
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space-grotesk text-center mb-12 sm:mb-16">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-space text-center mb-12 sm:mb-16">
               <span className="bg-gradient-to-r from-[#00e5ff] to-[#c77dff] bg-clip-text text-transparent">
                 Core Values
               </span>
@@ -371,19 +373,19 @@ export default function AboutPage() {
                                 {
                                     title: 'Innovation',
                                     description: 'Constantly exploring new technologies and creative solutions to solve complex problems',
-                                    icon: 'ri-lightbulb-line',
+                                    icon: '💡',
                                     color: '#00e5ff'
                                 },
                                 {
                                     title: 'Quality',
                                     description: 'Delivering exceptional code quality with attention to detail and best practices',
-                                    icon: 'ri-star-line',
+                                    icon: '⭐',
                                     color: '#c77dff'
                                 },
                                 {
                                     title: 'Collaboration',
                                     description: 'Working closely with clients and teams to achieve shared goals and success',
-                                    icon: 'ri-team-line',
+                                    icon: '🤝',
                                     color: '#ff3cac'
                                 }
                             ].map((value, index) => (
@@ -397,10 +399,11 @@ export default function AboutPage() {
                                     className="text-center p-6 sm:p-8 bg-[#1a1a3a]/50 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-[#00e5ff]/20 hover:border-[#00e5ff]/40 transition-all duration-300"
                                 >
                                     <div className="mb-6">
-                                        <i className={`${value.icon} text-3xl sm:text-4xl w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mx-auto`}
-                                           style={{color: value.color}}></i>
+                                        <div className="text-3xl sm:text-4xl w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center mx-auto">
+                                            {value.icon}
+                                        </div>
                                     </div>
-                                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-4 font-space-grotesk">
+                                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-4 font-space">
                                         {value.title}
                                     </h3>
                                     <p className="text-white/70 font-inter text-sm sm:text-base">

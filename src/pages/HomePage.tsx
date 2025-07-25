@@ -1,17 +1,50 @@
+// src/pages/HomePage.tsx
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Code, Smartphone, Globe, Database, Trophy, Users, Clock, CheckCheck, ExternalLink, Github, Eye, X, Star, ArrowRight } from 'lucide-react';
-import Hero from "@/components/Hero.tsx";
+import { Code, Smartphone, Globe, Database, Trophy, Users, Clock, CheckCircle, ExternalLink, Github, Star, ArrowRight } from 'lucide-react';
+import Hero from "@/components/Hero";
 
-const EnhancedHomePage = () => {
+interface ExpertiseItem {
+    title: string;
+    description: string;
+    icon: React.ComponentType<any>;
+    skills: string[];
+    color: string;
+    gradient: string;
+}
+
+interface Achievement {
+    number: string;
+    label: string;
+    icon: React.ComponentType<any>;
+}
+
+interface Testimonial {
+    name: string;
+    role: string;
+    content: string;
+    rating: number;
+}
+
+interface Project {
+    id: number;
+    title: string;
+    description: string;
+    tech: string[];
+    category: string;
+    liveUrl: string;
+    githubUrl: string;
+    gradient: string;
+}
+
+const HomePage: React.FC = () => {
     const [isClient, setIsClient] = useState(false);
-    const [selectedProject, setSelectedProject] = useState(null);
 
     useEffect(() => {
         setIsClient(true);
     }, []);
 
-    const expertise = [
+    const expertise: ExpertiseItem[] = [
         {
             title: 'Java Development',
             description: 'Building robust enterprise applications with Spring Boot and microservices architecture',
@@ -46,69 +79,63 @@ const EnhancedHomePage = () => {
         }
     ];
 
-    const achievements = [
+    const achievements: Achievement[] = [
         { number: '20+', label: 'Projects Completed', icon: Trophy },
         { number: '75+', label: 'Happy Clients', icon: Users },
         { number: '2+', label: 'Years Experience', icon: Clock },
-        { number: '98%', label: 'Success Rate', icon: CheckCheck }
+        { number: '98%', label: 'Success Rate', icon: CheckCircle }
     ];
 
-    const testimonials = [
+    const testimonials: Testimonial[] = [
         {
             name: 'Utkarsh Sinha',
             role: 'Chief Executive Officer, KriptoAD',
             content: "Working with Shriyan was a game-changer for our online websites. Not only did they deliver a sleek, user-friendly website, but they also built a mobile app that boosted our business.",
-            avatar: '/api/placeholder/100/100',
             rating: 5
         },
         {
             name: 'Praveen Yadav',
             role: 'Lead Developer, KriptoAD',
             content: 'Working with Shriyan to build our software development website was a seamless experience. The site is fast, responsive, and easy to update. Highly recommend their services for any tech-focused business!',
-            avatar: '/api/placeholder/100/100',
             rating: 5
         },
         {
             name: 'Lucky Singh',
             role: 'Design Director, KriptoAD',
             content: 'I needed a portfolio that truly represented my brand and creativity, and Shriyan nailed it. The design was clean, modern, and easy to navigate. I\'ve received countless compliments from clients since the launch!',
-            avatar: '/api/placeholder/100/100',
             rating: 5
         }
     ];
 
-    const recentProjects = [
+    const recentProjects: Project[] = [
         {
             id: 1,
             title: 'Utsav Travels',
             description: 'The project focuses on providing seamless booking experiences for local and long-distance travel.',
-            image: '/api/placeholder/600/400',
             tech: ['React.js', 'Supabase'],
             category: 'Web Development',
-            liveUrl: '#',
-            githubUrl: '#',
+            liveUrl: 'https://utsavtravels.vercel.app/',
+            githubUrl: 'https://github.com/shriyanjaiswal/travel-booking',
             gradient: 'from-neon-cyan to-neon-blue'
         },
         {
             id: 2,
             title: 'Recipe Master',
             description: 'Recipe application that helps you discover, save, and cook amazing recipes from around the world.',
-            image: '/api/placeholder/600/400',
             tech: ['Flutter', 'Firebase Firestore', 'TheMealDB API'],
             category: 'Mobile Development',
-            liveUrl: '#',
-            githubUrl: '#',
+            liveUrl: 'https://github.com/shriyanjaiswal/recipe_application',
+            githubUrl: 'https://github.com/shriyanjaiswal/recipe_application',
             gradient: 'from-neon-purple to-neon-pink'
         },
         {
             id: 3,
             title: 'Stake.io',
             description: 'Secure casino and sports betting platform',
-            image: '/api/placeholder/600/400',
             tech: ['Flutter', 'Firebase Firestore', 'Coin Payment API'],
             category: 'Web Development',
-            liveUrl: '#',
-            githubUrl: '#',
+            liveUrl: 'https://thestake.io/',
+            githubUrl: 'https://github.com/shriyanjaiswal/stake-platform',
             gradient: 'from-neon-pink to-neon-lime'
         }
     ];
@@ -120,6 +147,22 @@ const EnhancedHomePage = () => {
         {left: 30, top: 70}, {left: 60, top: 40}, {left: 15, top: 85},
         {left: 85, top: 15}, {left: 45, top: 65}, {left: 75, top: 35}
     ];
+
+    const ProjectIcon: React.FC<{ category: string; className?: string }> = ({ category, className = "" }) => {
+        const getIcon = () => {
+            switch (category) {
+                case 'Web Development': return '🌐';
+                case 'Mobile Development': return '📱';
+                default: return '💻';
+            }
+        };
+
+        return (
+            <div className={`flex items-center justify-center ${className}`}>
+                <span className="text-4xl sm:text-6xl">{getIcon()}</span>
+            </div>
+        );
+    };
 
     return (
         <div className="min-h-screen relative">
@@ -197,6 +240,7 @@ const EnhancedHomePage = () => {
                 )}
             </div>
 
+            {/* Hero Section */}
             <section className="relative z-10 py-20 px-6">
                 <div className="container mx-auto">
                     <motion.div
@@ -208,44 +252,6 @@ const EnhancedHomePage = () => {
                     >
                         <Hero />
                     </motion.div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {expertise.map((item, index) => (
-                            <motion.div
-                                key={item.title}
-                                initial={{opacity: 0, y: 50}}
-                                whileInView={{opacity: 1, y: 0}}
-                                viewport={{once: true}}
-                                transition={{delay: index * 0.2, duration: 0.8}}
-                                whileHover={{y: -10, scale: 1.02}}
-                                className="bg-gradient-dark/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-neon-cyan/50 transition-all duration-300"
-                            >
-                                <div className="text-center">
-                                    <div className="mb-6">
-                                        <div className={`w-16 h-16 mx-auto bg-gradient-to-r ${item.gradient} rounded-lg flex items-center justify-center`}>
-                                            <item.icon className="w-8 h-8 text-white" />
-                                        </div>
-                                    </div>
-                                    <h3 className="text-xl font-bold text-white mb-4 font-space">
-                                        {item.title}
-                                    </h3>
-                                    <p className="text-white/70 mb-6">
-                                        {item.description}
-                                    </p>
-                                    <div className="flex flex-wrap gap-2 justify-center">
-                                        {item.skills.map((skill) => (
-                                            <span
-                                                key={skill}
-                                                className="px-3 py-1 bg-white/10 text-white/80 rounded-full text-sm font-medium"
-                                            >
-                        {skill}
-                      </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
                 </div>
             </section>
 
@@ -384,26 +390,26 @@ const EnhancedHomePage = () => {
                                     <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30`} />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
 
+                                    <ProjectIcon category={project.category} className="absolute inset-0" />
+
                                     {/* Hover Overlay */}
                                     <motion.div
                                         initial={{ opacity: 0 }}
                                         whileHover={{ opacity: 1 }}
                                         className="absolute inset-0 bg-black/60 z-20 flex items-center justify-center space-x-4"
                                     >
-                                        <button
-                                            onClick={() => setSelectedProject(project.id)}
-                                            className="p-3 bg-neon-cyan text-black rounded-full hover:scale-110 transition-transform"
-                                        >
-                                            <Eye className="w-5 h-5" />
-                                        </button>
                                         <a
                                             href={project.liveUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="p-3 bg-neon-purple text-white rounded-full hover:scale-110 transition-transform"
                                         >
                                             <ExternalLink className="w-5 h-5" />
                                         </a>
                                         <a
                                             href={project.githubUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="p-3 bg-neon-pink text-white rounded-full hover:scale-110 transition-transform"
                                         >
                                             <Github className="w-5 h-5" />
@@ -469,12 +475,10 @@ const EnhancedHomePage = () => {
                                 className="bg-gradient-dark/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-neon-cyan/50 transition-all duration-300"
                             >
                                 <div className="flex items-center mb-6">
-                                    <div className="w-14 h-14 rounded-full overflow-hidden mr-4">
-                                        <img
-                                            src={testimonial.avatar}
-                                            alt={testimonial.name}
-                                            className="w-full h-full object-cover"
-                                        />
+                                    <div className="w-14 h-14 rounded-full overflow-hidden mr-4 bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">
+                      {testimonial.name.charAt(0)}
+                    </span>
                                     </div>
                                     <div>
                                         <h4 className="text-lg font-bold text-white font-space">
@@ -533,4 +537,4 @@ const EnhancedHomePage = () => {
     );
 };
 
-export default EnhancedHomePage;
+export default HomePage;

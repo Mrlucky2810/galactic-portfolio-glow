@@ -1,36 +1,65 @@
-
-import { useEffect, useRef } from 'react';
-import LocomotiveScroll from 'locomotive-scroll';
+// src/components/SmoothScroll.tsx
+import { useEffect, useRef, ReactNode } from 'react';
 
 interface SmoothScrollProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const SmoothScroll = ({ children }: SmoothScrollProps) => {
+const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const locomotiveScrollRef = useRef<LocomotiveScroll | null>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      locomotiveScrollRef.current = new LocomotiveScroll({
-        el: scrollRef.current,
-        smooth: true,
-        multiplier: 1,
-        class: 'is-reveal',
-      });
+    // Simple smooth scrolling implementation
+    const handleSmoothScroll = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+        e.preventDefault();
+        const href = target.getAttribute('href');
+        if (href) {
+          const element = document.querySelector(href);
+          if (element) {
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      }
+    };
+
+    const container = scrollRef.current;
+    if (container) {
+      container.addEventListener('click', handleSmoothScroll);
     }
 
     return () => {
-      if (locomotiveScrollRef.current) {
-        locomotiveScrollRef.current.destroy();
+      if (container) {
+        container.removeEventListener('click', handleSmoothScroll);
       }
     };
   }, []);
 
+  // Enhanced CSS for smooth scrolling
+  useEffect(() => {
+    // Add smooth scroll behavior to html element
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
+  }, []);
+
   return (
-    <div ref={scrollRef} data-scroll-container>
-      {children}
-    </div>
+      <div
+          ref={scrollRef}
+          className="relative"
+          style={{
+            scrollBehavior: 'smooth',
+            WebkitOverflowScrolling: 'touch'
+          }}
+      >
+        {children}
+      </div>
   );
 };
 
